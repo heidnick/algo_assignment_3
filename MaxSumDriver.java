@@ -27,6 +27,15 @@ public class MaxSumDriver{
             int[] array = {10,-5,40,10};
                                                       
             System.out.println( MaxSum.maxSumSubarray(array) );
+
+            
+            int[] a1 = {-1, -2, -3};
+                                                      
+            System.out.println( MaxSum.maxSumSubarray(a1) );
+
+            int[] a2 = {5, 15, -30, 10,-5,40,10};
+                                                      
+            System.out.println( MaxSum.maxSumSubarray(a2) );
         
 
         }catch( Exception e){
