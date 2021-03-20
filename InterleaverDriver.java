@@ -21,8 +21,13 @@ public class InterleaverDriver{
         try{
             Interleaver interleaver = new Interleaver();
                                                       
-            System.out.println( interleaver.isInterleaved("abc","dcab","abdccab") );
-            System.out.println( interleaver.isInterleaved("abc","dcab","acdcbab") );
+            //System.out.println( interleaver.isInterleaved("abc","dcab","abdccab") );
+            //System.out.println( interleaver.isInterleaved("abc","dcab","acdcbab") );
+            System.out.println(interleaver.getSolution("abc","dcab","abdccab"));
+            System.out.println(interleaver.getSolution("aaa","aaa","aaaaaa"));
+            System.out.println(interleaver.getSolution("aaa","eee","eaeaea"));
+            System.out.println(interleaver.getSolution("aaa","eee","aeaeae"));
+            System.out.println(interleaver.getSolution("aaa","eee","aaeaee"));
 
         }catch( Exception e){
             e.printStackTrace();

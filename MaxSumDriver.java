@@ -36,6 +36,10 @@ public class MaxSumDriver{
             int[] a2 = {5, 15, -30, 10,-5,40,10};
                                                       
             System.out.println( MaxSum.maxSumSubarray(a2) );
+
+            int[] a3 = {-3, -2, -1};
+                                                      
+            System.out.println( MaxSum.maxSumSubarray(a3) );
         
 
         }catch( Exception e){
