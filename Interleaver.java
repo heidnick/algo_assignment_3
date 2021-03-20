@@ -10,11 +10,9 @@
 
 public class Interleaver{
 
-    
     public Interleaver(){
         //YOUR CODE HERE
-
-       
+        
     }//constructor
 
     /**
@@ -31,12 +29,64 @@ public class Interleaver{
      * 
      */
     public Boolean isInterleaved(String x, String y, String z){
+        //error checks
+        if (x == null || x.length() == 0) {
+            return false;
+        }
+        if (y == null || y.length() == 0) {
+            return false;
+        }
+        if (x.length() + y.length() != z.length() || z == null){
+            return false;
+        }
 
-        //YOUR CODE HERE  
-
-        return false;
+        return isInterleaved(x, y, z, x.length()-1, y.length()-1);
 
     }//isInterleaved
+
+    private Boolean isInterleaved(String x, String y, String z, int i, int j) {
+        //base case -> either x or y is finished with checks so now pass to single interleaving recursion method
+        if (j<0) {
+            //System.out.println("j is less than 0");
+            //return true;
+            return singleInterleaved(x, z, i);
+        }
+        if (i<0) {
+            //System.out.println("i is less than 0");
+            //return true;
+            return singleInterleaved(y, z, j);
+        }
+
+        //subproblems
+        if (z.charAt(i + j + 1) == x.charAt(i) && z.charAt(i + j + 1) != y.charAt(j)) {
+            //System.out.println("case 1");
+            return isInterleaved(x, y, z, i-1, j);
+        }else if (z.charAt(i + j + 1) != x.charAt(i) && z.charAt(i + j + 1) == y.charAt(j)) {
+            //System.out.println("case 2");
+            return isInterleaved(x, y, z, i, j-1);
+        }else if (z.charAt(i + j + 1) == x.charAt(i) && z.charAt(i + j + 1) == y.charAt(j)) {
+            //System.out.println("case 3");
+            return isInterleaved(x, y, z, i-1, j);
+        }else {
+            //System.out.println("false interleaving");
+            return false;
+        }
+
+
+    }
+
+    private boolean singleInterleaved(String x_or_y, String z, int idx) {
+        //base case -> idx out of bounds
+        if (idx < 0) {
+            return true;
+        }
+
+        if (x_or_y.charAt(idx) == z.charAt(idx)) {
+            return singleInterleaved(x_or_y, z, idx - 1);
+        }else {
+            return false;
+        }
+    }
 
     /**
      * Returns a string representation of the solution of the interleaved string problem.

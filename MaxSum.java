@@ -34,31 +34,27 @@ public class MaxSum{
         int[] results = new int[a.length];
 
         int current_sum = a[0];
-
+        //if one element return that element 
+        
         if (current_sum >= 0) {
             results[0] = a[0];
-        }else {
+        } else {
             results[0] = -1;
         }
-        
+        //Code for filling table
         for (int i=1; i<a.length; i++) {
+            //if sum from adding element i non-neg and
+            //increases max sum add new max sum to table
             if (current_sum + a[i] > 0) {
                 current_sum += a[i];
                 results[i] = current_sum;
-            }else{
+            } else {
                 current_sum = 0;
                 results[i] = -1;
             }
         }
-
-        int max = results[0];
-        for (int i=1; i<results.length; i++) {
-            if (results[i] > max) {
-                max = results[i];
-            }
-        }
-
-        return max;
+        //Code for retrieval from table
+        return results[a.length-1];
 
     }//maxSubArray
 
