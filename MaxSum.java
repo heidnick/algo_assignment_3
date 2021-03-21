@@ -6,8 +6,8 @@
  * 
  * Implements an iterative dynamic programming solution to find the subarray of maximum sum, of a given array of numbers.
  * 
- * @author YOUR NAME HERE
- * Due Date: xx/xx/xx
+ * @author Nick Heid Aaron Gartner
+ * Due Date: 3/21/21
  * 
  */
 

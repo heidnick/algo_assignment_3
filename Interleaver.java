@@ -4,13 +4,13 @@
  *
  * Implements a dynamic programming solution to the Interleaving Strings problem.
  * 
- * @author YOUR NAME HERE
- * Due Date: xx/xx/xx
+ * @author Nick Heid Aaron Gartner
+ * Due Date: 3/21/21
  */
 
 public class Interleaver{
 
-    Boolean[][] storage;
+    private Boolean[][] storage;
 
     public Interleaver(){
         
@@ -31,13 +31,13 @@ public class Interleaver{
      */
     public Boolean isInterleaved(String x, String y, String z){
         /*
-            Solution: O(m + n)
+            Solution: O(m+n)
             Explanation: 
                 The function will run exactly m (the length of string x) plus n (the length string y amount of times), and will do 
                 constant work otherwise. Only one recursive call will be made, and either i or j will be decremented until one reaches
-                zero. To avoid index out of bounds errors, a second private recursive function is called and runs the remaining amount of
+                zero. To avoid index out of bounds errors, a second private recursive function is called when one string reaches index 0 and runs the remaining amount of
                 times j or i have until they reach zero. Every time a recursive call is made, it will add an entry to the table, so it will
-                properly fill the table.
+                fill the table appropriately.
         */
 
         //error checks
@@ -60,27 +60,20 @@ public class Interleaver{
     private Boolean isInterleaved(String x, String y, String z, int i, int j) {
         //base case -> either x or y is finished with checks so now pass to single interleaving recursion method
         if (i<0) {
-            //System.out.println("recursing on y");
-            //return true;
             return singleInterleaved(y, z, j, true);
         }
         if (j<0) {
-            //System.out.println("recursing on x");
-            //return true;
             return singleInterleaved(x, z, i, false);
         }
 
         //subproblems
         if (z.charAt(i + j + 1) == x.charAt(i) && z.charAt(i + j + 1) != y.charAt(j)) {
-            //System.out.println("case 1 (x): position: [" +i + "]["+j+"]");
             storage[i][j] = true;
             return isInterleaved(x, y, z, i-1, j);
         }else if (z.charAt(i + j + 1) != x.charAt(i) && z.charAt(i + j + 1) == y.charAt(j)) {
-            //System.out.println("case 2 (y): position: [" +i + "]["+j+"]");
             storage[i][j] = true;
             return isInterleaved(x, y, z, i, j-1);
         }else if (z.charAt(i + j + 1) == x.charAt(i) && z.charAt(i + j + 1) == y.charAt(j)) {
-            //System.out.println("case 3 (x): position: [" +i + "]["+j+"]");
             storage[i][j] = true;
             return isInterleaved(x, y, z, i-1, j);
         }else {
@@ -106,7 +99,6 @@ public class Interleaver{
             return true;
         }
         if (x_or_y.charAt(idx) == z.charAt(idx)) {
-            //System.out.println("singleInt: position: [" +i + "]["+j+"]");
             if (storage[i][j] != null) {
                 storage[i][j] = false;
             }else {
@@ -146,6 +138,7 @@ public class Interleaver{
 
 
         boolean result = isInterleaved(x, y, z);
+        //Prints the entire table
         /*for (int i =0; i< x.length(); i++) {
             for (int j = 0; j<  y.length(); j++) {
                 System.out.println("[" + i + "][" + j + "]: " + storage[i][j]);
@@ -153,12 +146,16 @@ public class Interleaver{
         }*/
         String solution = "";
         String answer = "";
+
+        //String initialization conditionals
+        //false if one string ends before the other
         if (storage[0][0] == false){
             if (z.charAt(0) == x.charAt(0)){
                 answer = "xy";
             }else{
                 answer = "yx";
             }
+            //if characte is a part of x or y add the corresponding letter to our string
         }else if (y.charAt(0) == x.charAt(0)){
             answer = "y";
         }else if (z.charAt(0) == x.charAt(0)){
@@ -166,7 +163,6 @@ public class Interleaver{
         }else {
             answer = "y";
         }
-        //System.out.println("");
         if (result) {
             solution = getSolution(x, y, 0, 0, answer);
         }else {
@@ -177,13 +173,11 @@ public class Interleaver{
     }
 
     private String getSolution(String x, String y, int i, int j, String answer){
-        //System.out.println("[" + i + "][" + j + "]: " + answer);
         //base cases
         if (i+1 > x.length()-1){
             for (int k = j; k< y.length()-1; k++) {
                 answer +="y";
             }
-            //System.out.println("[" + i + "][" + j + "]: " + answer);
 
             return answer;
         }
@@ -191,7 +185,6 @@ public class Interleaver{
             for (int k = i; k<x.length()-1; k++) {
                 answer +="x";
             }
-            //System.out.println("[" + i + "][" + j + "]: " + answer);
 
             return answer;
         }
